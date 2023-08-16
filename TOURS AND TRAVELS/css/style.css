@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Anton&family=Josefin+Sans&family=Lexend+Deca&family=Livvic&display=swap');
+
+/* -------------------------- CSS Reset -------------------------- */
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* -------------------------- Global Styling -------------------------- */
+:root{
+    --primary-font: 'Abel', sans-serif;
+    --title-font: 'Anton', sans-serif;
+    --paragraph-font: 'Lexend Deca', sans-serif;
+    --btn-font: 'Livvic', sans-serif;
+
+    --font-color: #3f4954;
+    --font-light: #686666da;
+    --nav-hover: #104f55;
+}
+
+a{
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+body{
+    color: var(--font-color);
+}
+
+ul{
+    list-style: none;
+}
+
+.btn{
+    background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+    border: none;
+    padding: 0.6rem 3rem;
+    font-family: var(--btn-font);
+    font-size: 1.1rem;
+}
+
+.btn-round{
+    border-radius: 2em;
+}
+
+.btn-transperent:hover{
+    border: 1px solid #a1c4fd;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+/* -------------------------- Navbar -------------------------- */
+.nav{
+    /* background-color: sky; */
+    transition: all 0.5s ease;
+    height: 10vh;
+    /* height: 50vh; */
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.nav .brand{
+    font-family: var(--paragraph-font);
+    color: var(--font-color);
+    font-size: 1.5rem;
+}
+
+.nav .nav-toggle-btn{
+    font-size: 1.6rem;
+}
+
+.nav .nav-items, .social{
+    position: absolute;
+    top: 7vh;
+    left: 5rem;
+}
+
+.nav .social{
+    top: 45vh;
+}
+
+.nav-items li{
+    margin: 2rem 0;
+}
+
+.nav-items a{
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+}
+
+.social .social-icon{
+    /* border: 2px solid red; */
+    margin-right: 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.social .social-icon:hover{
+    color: var(--font-light);
+}
+
+/* -------------------------- Cover -------------------------- */
+
+.cover{
+    height: 80vh;
+    text-align: center;
+    padding-top: 20vh;
+    position: relative;
+    color: white;
+}
+
+.cover::before, .cover::after{
+    content: "";
+    height: 80vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cover::before{
+    background: url("/images/bg4.jpg");
+    background-size: 100vw 80vh;
+    z-index: -1;
+    opacity: 0.7;
+}
+.cover::after{
+    background-color: black;
+    z-index: -2;
+}
+
+.cover .wave{
+    /* border: 2px solid red; */
+    position: absolute;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    z-index: 1000;
+}
+
+.cover p{
+    font-family: var(--primary-font);
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.cover h2{
+    font-family: var(--paragraph-font);
+    font-size: 2.4rem;
+    margin: 0.7rem 0 2rem;
+}
+
+/* -------------------------- Carousel -------------------------- */
+
+.carousel-container{
+    /* border: 2px solid blue; */
+    text-align: center;
+    margin-top: 5rem;
+    position: relative;
+}
+
+.carousel-container::before{
+    content: "";
+    /* border: 2px solid red; */
+    height: 100%;
+    width: 100%;
+    background: url("/images/Abract01.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    opacity: 0.5;
+}
+
+.carousel-container .carousel-item{
+    /* border: 2px solid red; */
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin: 5rem auto 2rem;
+    padding-bottom: 1.5rem;
+}
+
+.carousel-container .carousel-item h4{
+    font-family: var(--primary-font);
+    font-size: 1.4rem;
+    margin: 1rem 0.25rem 1.5rem;
+}
+
+.carousel-container .carousel-item p{
+    margin-top: 1.5rem;
+    font-family: var(--primary-font);
+}
+
+.carousel-container .carousel-item img{
+    height: 220px;
+}
+
+.owl-nav{
+    /* border: 2px solid red; */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* width: 200px; */
+    transform: translateX(-50%);
+}
+
+.nav-arrow{
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+/* -------------------------- Main -------------------------- */
+.grid-container{
+    display: grid;
+}
+/* .grid-container > div{
+    border: 2px solid red;
+} */
+/* .grid-container aside{
+    border:2px solid blue;
+} */
+
+.blogpost-cotainer{
+    /* border: 2px solid red; */
+    width: 80%;
+    margin: 5rem auto 0;
+}
+.blogpost-cotainer .blog-img-container{
+    width: 100%;
+    overflow: hidden;
+}
+
+.blogpost-cotainer .blog-img{
+    width: 100%;
+    transition: all 1s ease;
+}
+
+.blog-img:hover{
+    transform: scale(1.2);
+}
+
+.blogpost-cotainer .blog-title{
+    font-family: var(--title-font);
+    letter-spacing: 1.2px;
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.blogpost-cotainer .blog-text{
+    font-family: var(--paragraph-font);
+    color: var(--font-light);
+    font-size: 1.1rem;
+}
+
+.blogpost-cotainer button{
+    margin: 1rem 0;
+}
+
+.blogpost-cotainer button span{
+    margin-left: 1rem;
+}
+
+.blogpost-cotainer + hr{
+    width: 90%;
+    margin: auto;
+}
+
+/* -------------------------- Main - Pagination -------------------------- */
+.pagination{
+    text-align: center;
+    padding: 5rem 0;
+    font-size: 1.2rem;
+    color: var(--font-color);
+}
+
+.pagination .pagination-icon{
+    margin: 0 1rem;
+}
+
+.pagination span{
+    font-family: var(--paragraph-font);
+    font-weight: 600;
+    background-color: var(--font-color);
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 50%;
+}
+
+
+
+/* -------------------------- Aside - Category -------------------------- */
+
+.category-container{
+    width: 80%;
+    /* border: 2px solid red; */
+    margin: 2rem auto;
+}
+
+.category-container .category-title{
+    font-family: var(--paragraph-font);
+    color: black;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+.category-container .category-type{
+    margin: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* -------------------------- Aside - Popular Posts -------------------------- */
+
+.popular-post-container{
+    width: 80%;
+    margin: auto;
+}
+
+.popular-post-container img{
+    width: 100%;
+}
+
+.popular-post-container h2{
+    font-family: var(--title-font);
+    font-size: 1.2rem;
+    letter-spacing: 0.7px;
+    margin: 1rem 0 3rem;
+}
+
+/* -------------------------- Aside - Newsletter -------------------------- */
+
+.category-container .email-input-box{
+    margin: auto;
+    width: 80%;
+}
+.email-input-box input{
+    height: 2.5rem;
+    width: 100%;
+    padding-left: 20px;
+    font-size: 1.1rem;
+    font-family: var(--paragraph-font);
+}
+
+.category-container .submit-box{
+    /* border: 2px solid red; */
+    width: 80%;
+    margin: 1.5rem auto 3rem;
+}
+.submit-box input{
+    width: 100%;
+    height: 2.5rem;
+}
+
+/* -------------------------- Aside - Popular Tags -------------------------- */
+.sticky-note-container{
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+.sticky-note{
+    padding: 0.5rem 1rem;
+    border-radius: 1em;
+}
+
+
+/* -------------------------- Media Queries -------------------------- */
+@media (min-width: 667px){
+    .carousel-container::before{
+        width: 68%;
+        top: 10%;
+    }
+}
+
+@media (min-width: 768px){
+    .nav{
+        align-items: center;
+        padding: 1.5rem 2.5vw;
+    }
+    .nav .nav-toggle-btn{
+        display: none;
+    }
+    .nav .nav-items, .social{
+        position: static;
+        display: flex;
+    }
+
+    .nav-items li{
+        /* border: 2px solid red; */
+        height: 10vh;
+        /* width: 11.5vw; */
+        width: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-items li:hover{
+        background-color: var(--nav-hover);
+    }
+
+    .nav-items li:hover a{
+        color: white;
+    }
+
+}
+
+@media (min-width: 1024px){
+    .grid-container{
+        grid-template-columns: 70% 30%;
+    }
+}
+
+@media (min-width: 1200px){
+    .carousel-container::before{
+        background-size: cover;
+        top: 0;
+    }
+}
