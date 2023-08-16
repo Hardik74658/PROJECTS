@@ -1,0 +1,63 @@
+ @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,400;0,500;0,700;1,400;1,500;1,600;1,700&family=Satisfy&display=swap');
+
+
+ *,
+ ::after,
+ ::before {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: Arial, Helvetica, sans-serif;
+ }
+
+ /* .weather-container::after {
+     content: "";
+     width: 100vw;
+     height: 100vh;
+     position: absolute;
+     background-color: royalblue;
+     opacity: 0.3;  z-index: -1;
+ } */
+
+ .weather-container {
+     width: 100vw;
+     height: 100vh;
+     background: url(pexels-brett-sayles-1431822.jpg);
+     backface-visibility: visible;
+     background-size: 100vw 100vh;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     gap: 1rem;
+ }
+
+ #Location,
+ #submit {
+     padding: 15px;
+     font-size: 1.2rem;
+     color: black;
+     font-weight: bold;
+     border: 1px solid black;
+     border-radius: 10px;
+ }
+
+ .weather-details {
+     margin: 1rem;
+     font-size: 1.2rem;
+     color: white;
+     font-weight: bold;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 1rem;
+     /* border: 2px solid black; */
+     width: 22vw;
+ }
+
+ .weather-container h2 {
+     color: white;
+     font-size: 4.5rem;
+     font-weight: bolder;
+     font-family: 'Pacifico', cursive;
+     margin: 1.5rem;
+ }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+</head>
+<style>
+    *,
+    ::after,
+    ::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url(4.jpg);
+        background-size: 100vw 100vh;
+        gap: 1rem;
+    }
+
+    .todo-adder,
+    .todo-finder {
+        background-color: #e99218a0;
+        padding: 1rem 1.2rem;
+        border: 1px solid #002355;
+        border-radius: 10px;
+        display: inline-block;
+        width: 35vw;
+
+    }
+
+    #todo-input-adder,
+    #todo-input-finder {
+        width: 25vw;
+        font-size: 1.5rem;
+        padding: .5rem;
+        padding-left: 2rem;
+        border-radius: 8px;
+    }
+
+    #todo-input-finder {
+        width: 32vw;
+    }
+
+    #todo-input:focus {
+        outline: 2px solid;
+        outline-color: #002355;
+    }
+
+    #todo-add-btn {
+        width: 126px;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    #todo-add-btn:hover {
+        background-color: #e99318;
+        border-color: white;
+        color: white;
+    }
+
+    .todo-container {
+        background-color: #e99218a4;
+        color: #002355;
+        /* padding: 1rem; */
+        font-size: 1.5rem;
+        border-radius: 10px;
+    }
+
+    .todo {
+        width: 70vw;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .todo div {
+        width: 25vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .todo-btn {
+        padding: 0.5rem;
+        background-color: #002355;
+        color: white;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    .line-through {
+        text-decoration: line-through;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="header_container">
+            <div class="todo-adder">
+                <input type="text" id="todo-input-adder" placeholder="Enter Task">
+                <input type="button" value="+" id="todo-add-btn">
+            </div>
+            <div class="todo-finder">
+                <input type="text" id="todo-input-finder" placeholder="Enter Task">
+            </div>
+        </div>
+        <div class="todo-container">
+
+        </div>
+    </div>
+    <script>
+        //Todo-Lists For Handling Tasks
+        let todoList = [];
+        let completedList = [];
+        let searchList = [];
+
+        //HTML Elements 
+
+        const todoAddBtn = document.querySelector("#todo-add-btn");
+        const todoInput = document.querySelector("#todo-input-adder");
+        const todoContainer = document.querySelector(".todo-container");
+        const searchInput = document.querySelector("#todo-input-finder");
+        const searchBtn = document.querySelector("#todo-search-btn");
+
+        //For Adding Todo
+
+        todoAddBtn.addEventListener("click", () => {
+
+            todoList.push(todoInput.value);
+            //Update List Is Used For Updating Todo List And Display It On Page
+            updateList(todoList);
+            todoInput.value = "";
+        })
+
+        //For Serching Among Todo List
+
+        searchInput.addEventListener("keyup", (event) => {
+            //SearchTodo Is Used For Finding Wheather Task Contains Searched Word Or Not
+            searchTodo(searchInput.value);
+        })
+
+
+
+        function searchTodo(word) {
+            searchList.splice(0, searchList.length);   //To Make SearchList Empty Every Time When User Enters Something
+
+            if (word == null) {
+                //if Word Is Null Or User Deletes Everything entered Then For Displaying Normal Todo List
+                searchList = todoList.copyWithin(0, todoList.length);
+            }
+
+            //For Finding Wheather Task Contains Searched Word Or Not
+            todoList.forEach(todo => {
+                if (todo.toLowerCase().search(word.toLowerCase()) != -1) {
+                    searchList.push(todo);
+                }
+            })
+
+            //For Displaying List That Contains Searched Word
+            updateList(searchList);
+        }
+
+        function updateList(List) {
+            todoContainer.innerHTML = "";// To Empty Container Every Time Before Adding New Task 
+            var i = 0;
+            List.forEach(todo => {
+                let todoLine = document.createElement("p");
+                todoLine.innerHTML = `${todo}
+                                    <div>
+                                    <button class="todo-btn complete-btn " id="${i}" onclick = "complete(event)">Complete</button>
+                                    <button class="todo-btn edit-btn" id="${i}" onclick="edit(event)">Edit</button>
+                                    <button class="todo-btn delete-btn"id="${i++}"  onclick="deleteTodo(event)">Delete</button>
+                                    </div>
+                                    `;
+                todoLine.classList.add("todo");
+                todoContainer.appendChild(todoLine);
+
+                //For Displaying Completed Tasks Completed
+                if (completedList.includes(todo)) {
+                    todoLine.classList.add("line-through");
+                }
+
+            });
+
+        }
+
+        //For Complete Any Task 
+        function complete(event) {
+            const completeBtn = event.target;
+            const id = completeBtn.id;
+            let todo = completeBtn.parentElement.parentElement.innerText.split("\n")[0];
+            if (!completeBtn.parentElement.parentElement.classList.contains("line-through")) {
+                completeBtn.parentElement.parentElement.classList.add("line-through");
+                completedList.push(todo);
+            }
+            else {
+                completeBtn.parentElement.parentElement.classList.remove("line-through");
+                completedList.splice(id, 1)
+            }
+        }
+
+        //For Edit Any Task
+        function edit(event) {
+            const editBtn = event.target;
+            if (editBtn.parentElement.parentElement.classList.contains("line-through")) {
+                alert("The Task Is Already Completed")
+            }
+            else {
+                const value = event.target.parentElement.parentElement.innerText;
+                const clippedText = value.split("\n")[0];
+                let id = event.target.id;
+                newItemName = prompt(`Eneter New Value For ${clippedText} : `);
+                if (newItemName == null) {
+                    updateList(todoList);
+                }
+                else {
+                    todoList[id] = newItemName;
+                    updateList(todoList);
+                }
+            }
+
+        }
+
+        //For Deleting A Task
+        function deleteTodo(event) {
+            const deleteBtn = event.target;
+            deleteBtn.parentElement.parentElement.parentElement.removeChild(deleteBtn.parentElement.parentElement);
+            const id = event.target.id;
+            console.log(deleteBtn.parentElement.parentElement.innerText.split("\n")[0]);
+            let i = 0;
+            todoList.forEach(todo => {
+                if (todo.search(deleteBtn.parentElement.parentElement.innerText.split("\n")[0]) != -1) {
+                    console.log(deleteBtn.parentElement.parentElement.innerText.split("\n")[0]);
+                    todoList.splice(i, 1);
+                    console.log(todoList);
+                }
+                i++;
+            })
+            i = 0;
+            completedList.forEach(todo => {
+                if (todo.search(deleteBtn.parentElement.parentElement.innerText.split("\n")[0]) != -1) {
+                    console.log(deleteBtn.parentElement.parentElement.innerText.split("\n")[0]);
+                    completedList.splice(i, 1);
+                    console.log(completedList);
+                }
+                i++;
+            })
+        }
+
+    </script>
+</body>
+
+</html>

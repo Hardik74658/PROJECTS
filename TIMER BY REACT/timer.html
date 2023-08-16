@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+		<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+		<title>Timer By React</title>
+	</head>
+	<style>
+		*,::after,::before{
+			margin: 0;padding: 0;box-sizing: border-box;
+		}
+		.container{
+			background: url("/icons8-team-dhZtNlvNE8M-unsplash.jpg");
+			width: 100vw;
+			height: 100vh;
+			padding-top: 5rem;
+			background-size: 100vw 120vh;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			flex-direction: column;
+		}
+		#timer{
+			font-size: 5rem;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		.btn{
+			/* color: rgb(179, 149, 255); */
+			font-size: 1.5rem;
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: 500;
+		}
+	</style>
+	<body>
+		<div class="container">
+			<div id="timer">00:00:00</div>
+			<div id="timer-box-react"></div>
+		</div>
+	</body>
+	<script type="text/babel">
+		var sec = 0;
+		var hour=0;
+		var minutes=0;
+		var startID=null;
+		function StartTimer() {
+			function start() {
+				if(startID==null){
+					startID = setInterval(() => {
+						sec++;
+						if(sec==60){
+							sec=0;
+							minutes++;
+							if(minutes==60){
+								minutes=0;
+								hour++;
+							}
+						}
+						document.querySelector(
+							"#timer"
+						).innerText = `${hour}:${minutes}:${(sec)}`;
+					},1000);
+				}
+			}
+
+			function Stop(){
+				clearInterval(startID);
+				startID=null;
+			}
+
+			function reset(){
+				if(startID!=null){
+					Stop();
+				}
+				sec=0;
+				hour=0;
+				minutes=0;
+				document.querySelector("#timer").innerText = `${hour}:${minutes}:${(sec)}`;
+			}
+			return(
+				<div>
+					<button onClick={start} class={"btn"} style={{ margin : "1rem", color: "#000000", backgroundColor: "#c7eae4", width: "100px", height: "60px", border: "0px",borderRadius: "10px",}}>
+					Start
+					</button>
+					<button onClick={reset} class={"btn"} style={{ color: "black",backgroundColor: "rgb(179, 149, 255)", width: "100px", height: "60px", border: "0px",borderRadius: "10px",}}>
+						Reset
+					</button>
+					<button onClick={Stop} class={"btn"} style={{margin : "1rem", color: "black",  backgroundColor: "#fec4c0", width: "100px", height: "60px", border: "0px",borderRadius: "10px",}}>
+					Stop
+					</button>
+				</div>
+			);
+		}
+		const element = document.getElementById("timer-box-react");
+		const root = ReactDOM.createRoot(element);
+		root.render(<StartTimer />);
+	</script>
+</html>
